@@ -1,0 +1,16 @@
+/**
+ * server ko start karna
+ * database ko connect karna
+ */
+
+
+
+import {app} from './src/app.js'
+import connectToDb from './src/config/database.js'
+
+connectToDb()
+
+
+app.listen(4000,()=>{
+    console.log("server is running on port 3000")
+})
