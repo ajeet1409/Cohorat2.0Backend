@@ -26,7 +26,7 @@ app.use('/user',FromRoutes)
 app.use(express.static('./public'))
 
 const mongodb_uri = "mongodb://127.0.0.1:27017/practice"
-const Port = process.env.Port
+const Port = process.env.PORT
 
 try {
 
