@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import API from "../Api";
 
 export const Card = ({userD}) => {
+  console.log(import.meta.env.VITE_BASE_URL)
   const [userData, setUserData] = useState([]);
   const [show, setshow] = useState(true)
 

@@ -5,9 +5,9 @@ import { Routes ,Route} from 'react-router-dom'
 
 
 const App = () => {
+  // console.log(import.meta.env.VITE_BASE_URL)
   return (
     <div className="p-2 bg-gray-600 h-screen">
-      
 
      <Routes>
       <Route path='/' element={<Main/>}/>
