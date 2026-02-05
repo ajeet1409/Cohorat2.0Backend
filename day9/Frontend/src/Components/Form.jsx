@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import API from "../Api";
+import Card from "./Card";
 
 const Form = () => {
+  const [userD, setuserD] = useState([])
   const [formdata, setFormData] = useState({
     username: "",
     email: "",
@@ -14,8 +16,8 @@ const Form = () => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     const data = {
       username: formdata.username,
@@ -23,7 +25,7 @@ const Form = () => {
       password: formdata.password,
     };
 
-    // console.log("data", data);
+    console.log("data", data);
    try {
      const response = await API.post("/user/create", data,{
       headers:{
@@ -31,13 +33,14 @@ const Form = () => {
       }
      })
       console.log("form submitted", response.data)
+      setuserD(response.data)
 
        // OPTIONAL: clear form after success
-    setFormData({
-      username: "",
-      email: "",
-      password: "",
-    });
+    // setFormData({
+    //   username: "",
+    //   email: "",
+    //   password: "",
+    // });
 
    } catch (error) {
     console.log("error", error);
@@ -73,6 +76,9 @@ const Form = () => {
         />
         <button className="px-3 py-2 rounded-1xl bg-emerald-300">Submit</button>
       </form>
+
+       <h2 className='py-3'>All Users</h2>
+             <Card userD={userD}/>
     </div>
   );
 };

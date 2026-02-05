@@ -9,8 +9,7 @@ const Main = () => {
         
               <Form/>
         
-             <h2 className='py-3'>All Users</h2>
-             <Card/>
+            
     </div>
   )
 }

@@ -1,9 +1,16 @@
+
+import dotenv from 'dotenv'
 import express from 'express'
 
-import userModel from './models/User.js'
+
 import mongoose from 'mongoose'
+
+import path from 'path'
 import cors from 'cors'
 import FromRoutes from './routes/FromRoutes.js'
+
+dotenv.config()
+const __dirname=path.resolve()
 
 const app = express()
 app.use(express.json())
@@ -16,13 +23,14 @@ app.use(cors({
 }))
 // app.use(cors())
 app.use('/user',FromRoutes)
+app.use(express.static('./public'))
 
 const mongodb_uri = "mongodb://127.0.0.1:27017/practice"
-const Port = 5000
+const Port = 3000
 
 try {
 
-    mongoose.connect(mongodb_uri).then(
+    mongoose.connect(process.env.MONGO_URI).then(
         console.log('mongodb is conntect')
 
     )
@@ -31,10 +39,12 @@ try {
     console.log(`Mongodb not connected: ${err.message}`);
 }
 
-
-app.get('/', (req, res) => {
-    res.send("hello world123 ")
+// console.log(__dirname)
+app.use('*name',(req,res)=>{
+    res.sendFile(path.join(__dirname,".","/public/index.html"))
 })
+
+
 
 
 

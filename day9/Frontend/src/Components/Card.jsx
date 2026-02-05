@@ -3,7 +3,7 @@ import { getAllUser, deleteuser } from "../ApiResponse";
 import { Link } from "react-router-dom";
 import API from "../Api";
 
-export const Card = () => {
+export const Card = ({userD}) => {
   const [userData, setUserData] = useState([]);
   const [show, setshow] = useState(true)
 
@@ -14,7 +14,7 @@ export const Card = () => {
       setUserData(res.data.alluser);
     };
     fetchData();
-  }, []);
+  }, [userD]);
 
   console.log(userData);
   let printUserData = (
