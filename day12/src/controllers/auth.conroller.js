@@ -13,8 +13,7 @@ const register = async (req, res) => {
 
   // const authData={username,email,password}
 
-
-  const hashPassword = await bcrypt.hash(password,10);
+  const hashPassword = await bcrypt.hash(password, 10);
 
   const newUser = new userModel({
     username,
@@ -22,9 +21,9 @@ const register = async (req, res) => {
     password: hashPassword,
   });
 
-  await newUser.save()
+  await newUser.save();
 
-  const token = jwt.sign({ userId: newUser._id },process.env.JWT_SECRET, {
+  const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 
@@ -45,5 +44,7 @@ const register = async (req, res) => {
     token: token,
   });
 };
+
+
 
 export default { register };
