@@ -22,10 +22,19 @@ const userSchema = new mongoose.Schema({
     profileImage:{
         type:String,
         default:'https://ik.imagekit.io/x6anjwmg4/profile-picture-vector-illustration.webp'
-    }
+    },
+
+     posts:[
+           {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'posts',
+            required:[true,"without userId not created post"]
+           }
+        
+        ]
 
 })
 
-  const userModel= mongoose.model('user',userSchema)
+  const userModel= mongoose.model('users',userSchema)
 
   export default userModel;
