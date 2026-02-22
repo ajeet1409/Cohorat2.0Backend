@@ -10,7 +10,7 @@ const postRouter =express.Router()
  */
 import multer from "multer";
 
-import isloggin from "../middleware/auth.js";
+import isloggin from "../middleware/auth.middleware.js";
 
 const storage = multer.memoryStorage()
 const upload= multer({storage:storage})

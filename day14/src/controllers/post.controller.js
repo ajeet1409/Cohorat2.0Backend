@@ -107,7 +107,7 @@ try {
 
   const postDetails = await postModel.findById(postid)
   console.log(postDetails)
-  
+
  if(!postDetails){
   return res.status(404).json({message:"postdetails not found"})
  }
