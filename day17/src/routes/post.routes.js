@@ -3,7 +3,8 @@ import postController from '../controllers/post.controller.js'
 
 const postRouter =express.Router()
 /**
- * Post /api/posts [protected]
+ * @route Post /api/posts [protected]
+ * @description create a post
  * 
  * (protected route)
  * req.body ={caption,umg_url}
@@ -18,21 +19,43 @@ const upload= multer({storage:storage})
 postRouter.post('/',isloggin,upload.single('image'),postController.createPostController)
 
 /**
- * Get /api/posts/ [protected]
+ *  @route Get /api/posts/ [protected]
+ * @description  get user posts only
+ * @access    private
+ * 
  */
 postRouter.get('/',isloggin,postController.userPostController)
 
 /**
- * Get /api/posts/allUserPosts
+ *  @route Get /api/posts/allUserPosts
+ * @description
+ * @access public
  */
 
 postRouter.get('/allUserPost',postController.allPostController)
 /**
- * Get /api/posts/details/:postid
+ * @route Get /api/posts/details/:postid
  */
-// return  an detail about specific post with id also check wheather the post  belong to the user that is requesting come from 
+// @description return  an detail about specific post with id also check wheather the post  belong to the user that is requesting come from 
 
 postRouter.get('/details/:postid',isloggin,  postController.postDetailsController)
 
+
+/**
+ * @route post /api/posts/like/:id
+ * @description  user like the post
+ * @access 
+ */
+
+postRouter.post('/like/:id',isloggin,postController.creatingLikePost);
+
+/**
+ * @routes /api/posts/likesCount
+ * @description count the like 
+ * @access
+ * 
+ */
+
+postRouter.get('/likesCount/:id',isloggin,postController.getLikeCount)
 
 export default postRouter;

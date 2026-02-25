@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     ,
     email:{
         type:String,
-        unique:[true,"email is alreay exit"]
+        unique:[true,"email is allreay exit"]
     }
     ,
     password:{
@@ -31,7 +31,22 @@ const userSchema = new mongoose.Schema({
             required:[true,"without userId not created post"]
            }
         
-        ]
+        ],
+
+    // [1 id = 12 bytes ]
+    //?example of vk 275 followers id store means it take 3.2 gb so it is not better approach instead of use edge collection
+
+
+    // follower:[{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:"users"
+
+    // }],
+    // following:[{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'users'
+    // }]   
+
 
 })
 

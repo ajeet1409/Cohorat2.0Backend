@@ -6,11 +6,15 @@
 
 
 import express from 'express'
+import cookieParser from 'cookie-parser'
+import rateLimit from 'express-rate-limit'
+
+//* required routes
 import authRouter from './routes/auth.route.js'
 import postRouter from './routes/post.routes.js'
-import cookieParser from 'cookie-parser'
+import userRouter from './routes/user.route.js'
 
-import rateLimit from 'express-rate-limit'
+
 
 export const app= express()
 
@@ -31,5 +35,8 @@ app.use(cookieParser())
 app.use(rateLimiting)
 
 
+// *using routes
 app.use("/api/auth",authRouter)
 app.use('/api/posts',postRouter)
+app.use('/api/users',userRouter)
+
