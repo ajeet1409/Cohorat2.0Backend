@@ -29,7 +29,7 @@ const register = async (req, res) => {
         "user exit by same email or username" +
         (isUserAllreayExits.email == email
           ? " user exit by this email"
-          : " qqqwexit by this username"),
+          : " exit by this username"),
     });
   }
 
