@@ -1,39 +1,45 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../style/form.scss";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toast";
+import { Link, useNavigate } from "react-router-dom";
+
+// import { login } from "../services/auth.api";
+import { useAuth } from "../hook/useAuth.js";
 
 const Login = () => {
-
+  const navigate = useNavigate();
+  const { handleLogin, loading, user } = useAuth();
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
-  console.log(username,password);
+
+  console.log(user);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+  console.log(username, password);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user={
+    const user = {
       username,
-      password
-    }
+      password,
+    };
     // api call for login
 
-    const res = await axios.post('http://localhost:3000/api/auth/login',user,{
-      withCredentials:true
-    })
-    console.log(res);
-    toast.success('user login successfully')
-    
-  }
+    handleLogin(user).then((res) => {
+      console.log(res);
+    });
+
+    navigate("/");
+  };
 
   return (
-
     <main>
       <div className="form-container">
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
           <input
-          onInput={(e)=>setUsername(e.target.value)}
+            onInput={(e) => setUsername(e.target.value)}
             type="text"
             name="username"
             placeholder="Enter username"
@@ -41,7 +47,7 @@ const Login = () => {
           />
           {/* <input type="email" name='emial' placeholder='Email'  required/> */}
           <input
-          onInput={(e)=>setPassword(e.target.value)}
+            onInput={(e) => setPassword(e.target.value)}
             type="password"
             name="password"
             placeholder="password"
@@ -49,9 +55,12 @@ const Login = () => {
           />
           <button>Login</button>
         </form>
-      <p>
-       Dont't   have a account? <Link className='toogle-authform' to="/register">Register</Link>{" "}
-      </p>
+        <p>
+          Dont't have a account?{" "}
+          <Link className="toogle-authform" to="/register">
+            Register
+          </Link>{" "}
+        </p>
       </div>
     </main>
   );

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axois from 'axios'
-import { toast } from "react-toast";
+import {register} from "../services/auth.api.js";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -10,51 +9,50 @@ const Register = () => {
     password: "",
   });
 
-  const handleChnage = (e) => {
+  const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     // console.log(form);
-  }
+  };
   const handleSumbit = async (e) => {
     e.preventDefault();
-     
-    const user={
-      username:form.username,
-      email:form.email,
-      password:form.password
-    }
+
+    const user = {
+      username: form.username,
+      email: form.email,
+      password: form.password,
+    };
     console.log(user);
 
-    try {
-      const res= await axois.post('http://localhost:3000/api/auth/register',user,{
-       withCredentials:true
-      })
-      
-     console.log(res);
-     setForm(res.data)
-     toast.success('user register successfully')
+// api call for register
+    const res = await register(user);
 
-    } catch (error) {
-      console.log(error);
-      
-    }
-    
-
+    console.log(res);
   };
-
-  
 
   return (
     <main>
       <div className="form-container">
         <h1>Register</h1>
         <form onSubmit={handleSumbit}>
-          <input type="text" name="username" placeholder="username" onChange={handleChnage} required />
-          <input type="email" name="email" placeholder="email" onChange={handleChnage}  required />
+          <input
+            type="text"
+            name="username"
+            placeholder="username"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            onChange={handleChange}
+            required
+          />
           <input
             type="password"
             name="password"
             placeholder="password"
-            onChange={handleChnage} 
+            onChange={handleChange}
             required
           />
           <button>Register</button>
