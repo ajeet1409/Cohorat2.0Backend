@@ -1,6 +1,7 @@
 import { createContext,  useState } from "react";
 import { login, register } from "../features/auth/services/auth.api.js";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const authContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -30,6 +31,7 @@ console.log(user);
         const res=await register(user)
         setUser(res)
         return res
+
     } catch (error) {
         console.log(error);
         

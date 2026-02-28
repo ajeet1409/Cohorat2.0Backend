@@ -7,12 +7,11 @@ import { useAuth } from "../hook/useAuth.js";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { handleLogin, loading, user } = useAuth();
+  const { handleLogin, loading } = useAuth();
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
-  console.log(user);
-
+  
   if (loading) {
     return <h1>Loading...</h1>;
   }

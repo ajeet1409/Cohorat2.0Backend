@@ -26,8 +26,8 @@ const createPostController = async (req, res) => {
   console.log(req.user);
   // console.log(user)
 
-  // console.log(req.body);
-  // console.log(req.file);
+  console.log(req.body);
+  console.log(req);
 
   try {
     //move image server to imageKitCloud server

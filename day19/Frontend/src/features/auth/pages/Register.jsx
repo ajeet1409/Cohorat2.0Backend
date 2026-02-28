@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {register} from "../services/auth.api.js";
+import {useAuth} from "../services/auth.api.js";
 
 const Register = () => {
+   const {handleRegister,loading}= useAuth()
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -23,10 +24,14 @@ const Register = () => {
     };
     console.log(user);
 
+     if (loading) {
+    return <h1>Loading...</h1>;
+  }
 // api call for register
-    const res = await register(user);
-
+    const res = await handleRegister(user)
     console.log(res);
+
+    
   };
 
   return (
