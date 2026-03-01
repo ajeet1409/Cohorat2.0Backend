@@ -1,0 +1,39 @@
+@mixin flex-column($gap: 0rem) {
+  display: flex;
+  flex-direction: column;
+
+  gap: $gap;
+}
+
+main {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .form-container {
+    //margin use nahi kiys isliye display flex     kiya hai for gap
+
+    @include flex-column(1rem);
+
+    min-width: 350px;
+  }
+
+  form {
+    @include flex-column(1rem);
+    input {
+      border: none;
+      outline: none;
+
+      padding-inline: 1rem; // means left and right space
+      padding-block: 0.5rem; // top bottom space
+      border-radius: 1rem;
+    }
+
+  }
+
+  
+
+}
