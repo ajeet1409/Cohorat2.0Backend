@@ -100,7 +100,7 @@ const login = async (req, res) => {
       {email},
       {username}
     ]
-  });
+  }).select('+password');
 
   console.log(user)
 

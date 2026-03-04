@@ -23,11 +23,11 @@ app.get('/',(req,res)=>{
     res.send('hello')
 })
 //rate limit config
-const rateLimiting=rateLimit({
-    windowMs:1*60*1000, // 1 min
-    max:5,
-    message:"to many request try again later"
-})
+// const rateLimiting=rateLimit({
+//     windowMs:1*60*1000, // 1 min
+//     max:5,
+//     message:"to many request try again later"
+// })
 app.use(cors({
     origin:"http://localhost:5173",
     credentials:true
@@ -36,7 +36,7 @@ app.use(express.json())  // agar frontend se tum data send kar rahe ho  as a pla
 app.use(express.urlencoded({extended:true}))
 
 app.use(cookieParser())
-app.use(rateLimiting)
+// app.use(rateLimiting)
 
 
 // *using routes

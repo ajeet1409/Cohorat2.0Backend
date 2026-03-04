@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link ,useNavigate} from "react-router";
 
 import { useAuth } from "../hook/useAuth.js";
 const Register = () => {
+  const navigate = useNavigate()
   const { loading, handleRegister } = useAuth();
   const [form, setform] = useState({
     username: "",
@@ -23,8 +24,10 @@ const Register = () => {
     };
 
     // call api to register
-    const res = await handleRegister(user);
-    console.log(res)
+     await handleRegister(user);
+     navigate('/')
+  
+
   };
   if (loading) {
     return <h1>Loadinging...</h1>;

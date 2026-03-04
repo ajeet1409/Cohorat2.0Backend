@@ -63,10 +63,34 @@ const createPostController = async (req, res) => {
   }
 };
 
-// get allPost /api/posts/allPosts
-
+/**
+ * /feed api
+ * @route get allPost /api/posts/allPosts
+ * @access private
+ *
+ **/
 const allPostController = async (req, res) => {
-  const allUserPost = await postModel.find();
+  const userId = req.user.userId;
+  // console.log(userId)
+  const allUserPost = await Promise.all(
+    ((await postModel.find().populate("user", "-password").lean())).map(async (post) => {
+
+      /**
+       ** console.log(typeof post) =>mongooseObject  does not add new property 
+       * *but using lean() to convert mongoose object to regular object to add property
+       */
+      
+      const isLiked = await likeModel.findOne({
+        user: userId,
+        post: post._id,
+      });
+
+      post.isLiked = !!isLiked;
+      
+
+      return post;
+    }),
+  );
   // console.log(allUserPost)
 
   return res
@@ -155,7 +179,7 @@ const creatingLikePost = async (req, res) => {
     });
   }
 
-  //! crate like post
+  //! create like post
   const like = await likeModel.create({
     post: req.params.id,
     user: req.user.userId,
@@ -183,5 +207,5 @@ export default {
   allPostController,
   postDetailsController,
   creatingLikePost,
-  getLikeCount
+  getLikeCount,
 };

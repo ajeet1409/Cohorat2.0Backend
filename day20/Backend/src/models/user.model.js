@@ -15,13 +15,14 @@ const userSchema = new mongoose.Schema({
     ,
     password:{
         type:String,
+       // select:false,//! hidden default password => if apply select:false password save in database but mongoose does not read the password if appy query
         required:[true,"password is required"]
     },
     bio:String,
 
     profileImage:{
         type:String,
-        default:'https://ik.imagekit.io/x6anjwmg4/profile-picture-vector-illustration.webp'
+        default:'https://ik.imagekit.io/x6anjwmg4/defaultImage.webp?updatedAt=1772088900194'
     },
 
      posts:[
