@@ -23,6 +23,9 @@ const imagekit = new ImageKit({
 
 const createPostController = async (req, res) => {
   const user = await userModel.findOne({ _id: req.user.userId });
+  if(!user){
+    return res.status(401).json({message:"user is not authorized"})
+  }
   console.log(req.user);
   // console.log(user)
 
@@ -64,17 +67,18 @@ const createPostController = async (req, res) => {
 };
 
 /**
- * /feed api
  * @route get allPost /api/posts/allPosts
+ *  / @des feed api
  * @access private
  *
  **/
 const allPostController = async (req, res) => {
   const userId = req.user.userId;
-  // console.log(userId)
+  
   const allUserPost = await Promise.all(
     ((await postModel.find().populate("user", "-password").lean())).map(async (post) => {
 
+      // .sort({_id:-1}) for sorting
       /**
        ** console.log(typeof post) =>mongooseObject  does not add new property 
        * *but using lean() to convert mongoose object to regular object to add property
@@ -85,13 +89,15 @@ const allPostController = async (req, res) => {
         post: post._id,
       });
 
-      post.isLiked = !!isLiked;
+      // post.isLiked=Boolean(isLiked)
+      //* !!(not operator) convert to boolean 
+      post.isLiked = !!isLiked; 
       
 
       return post;
     }),
   );
-  // console.log(allUserPost)
+  console.log(allUserPost)
 
   return res
     .status(200)
@@ -189,6 +195,41 @@ const creatingLikePost = async (req, res) => {
 };
 
 /**
+ *  @route delete /api/user/unlike/:postId
+ */
+
+const unLikePost=async(req,res)=>{
+  
+   if (!req.params.id) {
+    return res.status(400).json({ message: "post  is required" });
+  }
+
+  const postId = await postModel.findById(req.params.id);
+  //! 1.post id exit
+  if (!postId) {
+    return res.status(404).json({ message: "post  not found in post model" });
+  }
+
+   const isLiked = await likeModel.findOne({
+    post: req.params.id,
+    user: req.user.userId,
+  });
+
+  if (!isLiked) {
+    return res.status(409).json({
+      message: "user did not like the post",
+    });
+  }
+  await likeModel.findOneAndDelete({
+    _id:isLiked._id
+
+  })
+
+  return res.status(200).json({message:'unlike the post successfully'})
+
+}
+
+/**
  * @route /api/posts/likesCount/:id
  */
 const getLikeCount = async (req, res) => {
@@ -208,4 +249,5 @@ export default {
   postDetailsController,
   creatingLikePost,
   getLikeCount,
+  unLikePost
 };

@@ -29,12 +29,12 @@ const sendfollowUserController = async (req, res) => {
       return res.status(400).josn({ message: "Following user id required" });
     }
 
-    // !3Prevent self follow
+    // !2 Prevent self follow
     if (followerId === followingId) {
       return res.status(400).json({ message: "you can not follow  yourself" });
     }
 
-    // !4. Check user exists
+    // !3. Check user exists
     const isFolloweeExit = await userModel.findById(followingId);
 
     if (!isFolloweeExit) {
@@ -80,18 +80,22 @@ const sendfollowUserController = async (req, res) => {
 };
 
 /**
- * @route put api/user/accept/:id
+ * @route put api/users/accept/:id
  * @description accepted the request
  *
  *
  */
 const acceptRequest = async (req, res) => {
   const requestId = req.params.id;
+  
+
   const alreadyAccept = await followModel.findById(requestId);
+ 
   if (alreadyAccept.status == "accepted") {
     return res.status(200).json({ message: "already accept the request" });
   }
 
+ 
   const acceptRequest = await followModel.findByIdAndUpdate(
     requestId,
     {
@@ -110,6 +114,7 @@ const acceptRequest = async (req, res) => {
 
 const rejectRequest = async (req, res) => {
   const requestId = req.params.id;
+  consol.log(requestId)
   const alreadyReject = await followModel.findById(requestId);
   if (alreadyReject.status == "rejected") {
     return res.status(200).json({ message: "already areject the request" });

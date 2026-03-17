@@ -20,6 +20,7 @@ const likeScehma= new mongoose.Schema({
 }
 )
 
+//? schema level protection
 likeScehma.index({post:1,user:1},{unique:true})
 
 const likeModel = mongoose.model('like',likeScehma)

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../style/feed.scss";
 import Post from "../components/Post";
 import { usePost } from "../hook/usePost.js";
+import Nav from "../../shared/components/Nav.jsx";
 
 const Feed = () => {
   const { feed, handleGetFeed ,loading} = usePost();
@@ -19,9 +20,10 @@ const Feed = () => {
 
   return (
     <div className="feed-page">
+      <Nav/>
       <div className="feed">
         <div className="posts">
-          {feed.map((post, index) => {
+          {feed.reverse().map((post, index) => {
             return <Post key={index} user={post.user} post={post} />;
           })}
         </div>

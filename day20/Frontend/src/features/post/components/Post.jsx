@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { usePost } from "../hook/usePost";
+import { unLikePost } from "../services/post.api";
 
 const Post = ({ user, post }) => {
+  const { handleLikePost,handleUnlikePost } = usePost();
+
+  // const toggleLike = async () => {
+  //   console.log(post._id)
+  //   await handleLikePost(post._id);
+  // };
+
+
   return (
     <>
       <div className="post">
         <div className="user">
           <div className="img-wrapper">
-            <img src={user.profileImage} alt="" />
+            <img src={user?.profileImage} alt="" />
           </div>
 
-          <p>{user.username}</p>
+          <p>{user?.username}</p>
         </div>
 
         <img src={post.img_Url} alt="" />
+
         <div className="icons">
           <div className="left">
-            <button>
+            <button >
               <svg
-              className={post.isLiked ? "like":''}
+                className={post.isLiked ? "like" : ""}
+                onClick={()=>post.isLiked ? handleUnlikePost(post._id):handleLikePost(post._id)}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"

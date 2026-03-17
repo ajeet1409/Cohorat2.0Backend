@@ -7,7 +7,7 @@ const postRouter = express.Router();
  * @description create a post
  *
  * (protected route)
- * req.body ={caption,umg_url}
+ * req.body ={caption,img_url}
  */
 import multer from "multer";
 
@@ -19,7 +19,7 @@ const upload = multer({ storage: storage });
 postRouter.post(
   "/",
   isloggin,
-  upload.single("image"),
+  upload.single("postImage"),
   postController.createPostController,
 );
 
@@ -57,6 +57,12 @@ postRouter.get(
 
 postRouter.post("/like/:id", isloggin, postController.creatingLikePost);
 
+/**
+ * @route Delete /api/user/unlike/:id
+ * @des unlike the post successfully
+ * a@access private
+ */
+postRouter.delete('/unlike/:id',isloggin,postController.unLikePost)
 /**
  * @routes /api/posts/likesCount
  * @description count the like

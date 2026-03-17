@@ -12,10 +12,11 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
 
   .form-container {
-    //margin use nahi kiys isliye display flex     kiya hai for gap
-
+    
+    //* margin use nahi kiys isliye display flex     kiya hai for gap
     @include flex-column(1rem);
 
     min-width: 350px;

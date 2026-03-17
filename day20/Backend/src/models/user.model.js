@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
 
     profileImage:{
         type:String,
-        default:'https://ik.imagekit.io/x6anjwmg4/defaultImage.webp?updatedAt=1772088900194'
+        default:'https://ik.imagekit.io/x6anjwmg4/defaultImage.webp'
     },
 
      posts:[

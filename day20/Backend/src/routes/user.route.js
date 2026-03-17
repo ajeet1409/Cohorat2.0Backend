@@ -5,9 +5,22 @@ import isloggin from '../middleware/auth.middleware.js'
 
 const userRouter = express.Router()
 
-userRouter.post('/follow/:id',isloggin,  userController.sendfollowUserController)
-userRouter.put('/accept/:id',isloggin,  userController.acceptRequest)
-userRouter.put('/reject/:id',isloggin,  userController.rejectRequest)
+userRouter.post('/follow-request/:id',isloggin,  userController.sendfollowUserController)
+
+/**
+ * @route PUT api/users//follow-request/accept/:id
+ * @description accepted the request
+ *
+ *
+ */
+userRouter.put('/follow-request/accept/:id',isloggin,  userController.acceptRequest)
+
+/**
+ * @route PUT /pai/users/follow-request/reject/:_id
+ * @des reject the request
+ */
+
+userRouter.put('/follow-request/reject/:id',isloggin,  userController.rejectRequest)
 
 userRouter.delete('/unfollow/:id',isloggin,userController.unfollowUserController)
 userRouter.get('/followers',isloggin, userController.getFollowerController)

@@ -29,7 +29,8 @@ const followSchema = new mongoose.Schema(
   },
 );
 
-//for validation at schema level
+
+//? for validation at schema level
 
 
 followSchema.index({follower:1,followee:1},{unique:true})

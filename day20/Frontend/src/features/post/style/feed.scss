@@ -1,8 +1,10 @@
 .feed-page {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  //   background-color: green;
+  flex-direction: column;
+
+  align-items: center;
+  // background-color: green;
 
   .feed {
     max-width: 400px;
@@ -13,9 +15,9 @@
       display: flex;
       gap: 1rem;
       flex-direction: column;
-      
+
       // padding-block: 1rem;
-      
+
       .post {
         background-color: rgb(54, 29, 29);
         // border: 1px salmon solid;
@@ -56,28 +58,27 @@
           }
         }
 
-        .icons{
+        .icons {
           display: flex;
           justify-content: space-between;
-          .like{
+          .like {
             color: red;
           }
-          
-          svg{
-          width: 1rem;
-          aspect-ratio: 1/1;
-          color: white;
-          
-        }
-        .left{
-          display: flex;
-          gap: 1rem;
-        }
-        button{
-          background-color: transparent;
-          border: none;
-          outline: none;
-        }
+
+          svg {
+            width: 1rem;
+            aspect-ratio: 1/1;
+            color: white;
+          }
+          .left {
+            display: flex;
+            gap: 1rem;
+          }
+          button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+          }
         }
 
         img {

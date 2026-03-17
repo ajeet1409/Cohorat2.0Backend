@@ -1,28 +1,24 @@
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 
-const isloggin = (req,res,next)=>{
+const isloggin = (req, res, next) => {
+  try {
+    const token = req.cookies.token;
 
-    try {
+    if (!token)
+      return res.status(401).json({
+        message: "user is not authenticated",
+      });
 
-        const token = req.cookies.token
-        
-        if(!token) return res.status(401).json({
-            message:"user is not authenticated"
-        })
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        const decoded = jwt.verify(token,process.env.JWT_SECRET)
-        // console.log(decoded)
-         req.user= decoded
-        
-        next()
+    // console.log(decoded)
+    req.user = decoded;
 
-        
-    } catch (error) {
-
-          res.clearCookie("token")
+    next();
+  } catch (error) {
+    res.clearCookie("token");
     console.log(error);
-      return res.status(401).json({message:"token not found or authorized"})
-        
-    }
-}
-export default isloggin
+    return res.status(401).json({ message: "token not found or authorized" });
+  }
+};
+export default isloggin;
