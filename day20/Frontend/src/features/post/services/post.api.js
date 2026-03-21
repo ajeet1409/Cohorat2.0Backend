@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "http://localhost:3000/api || https://cohorat2-0backend.onrender.com/api",
+  baseURL: "https://cohorat2-0backend.onrender.com/api",
   withCredentials: true,
 });
 
