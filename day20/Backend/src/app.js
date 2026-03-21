@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser'
 import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
 import cors from 'cors'
+import path from 'path'
 
 //* required routes
 import authRouter from './routes/auth.route.js'
@@ -18,10 +19,13 @@ import userRouter from './routes/user.route.js'
 
 
 export const app= express()
+const __dirname = path.resolve()
 
-app.get('/',(req,res)=>{
-    res.send('hello')
-})
+// app.get('/',(req,res)=>{
+//     res.send('hello')
+// })
+console.log(__dirname +'/public/index.html') // 
+app.use(express.static('./public'))
 app.use(morgan('dev'))
 //rate limit config
 // const rateLimiting=rateLimit({
@@ -30,15 +34,17 @@ app.use(morgan('dev'))
 //     message:"to many request try again later"
 // })
 app.use(cors({
-    origin:"http://localhost:5173 ",
+    origin:"http://localhost:5173",
     credentials:true
 }))
 app.use(express.json())  // agar frontend se tum data send kar rahe ho  as a plain text convert to json form
+
 
 app.use(express.urlencoded({extended:true}))
 
 app.use(cookieParser())
 // app.use(rateLimiting)
+
 
 
 // *using routes
@@ -47,3 +53,7 @@ app.use('/api/posts',postRouter)
 app.use('/api/users',userRouter)
 
     
+app.use('*name',(req,res)=>{
+    res.sendFile(path.join(__dirname,".","/public/index.html"))
+    // res.send('hello')
+})
