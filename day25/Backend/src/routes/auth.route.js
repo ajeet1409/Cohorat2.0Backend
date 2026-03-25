@@ -1,6 +1,7 @@
 import express from 'express'
 
 import authController from '../controllers/auth.controller.js'
+import authMiddleware from '../middleware/auth.middleware.js'
 
 const authRoute= express.Router() 
 
@@ -18,6 +19,21 @@ authRoute.post('/register',authController.register)
  * @des  login the user 
  */
 authRoute.post('/login',authController.login)
+
+/**
+ * @route GET /api/auth/get-me  [private]
+ * @des  only  user login  data fetch
+ * 
+ */
+
+authRoute.get('/get-me',authMiddleware.isIdentifyUser, authController.getMe)
+
+/**
+ * @route get /api/auth/logout
+ * @des logout successfully
+ */
+
+authRoute.get('/logout',authController.logoutUser)
 
 
 export default authRoute;

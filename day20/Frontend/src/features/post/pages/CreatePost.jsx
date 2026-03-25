@@ -22,7 +22,14 @@ const CreatePost = () => {
     data.append("postImage", file);
 
     console.log(Object.fromEntries(data));
-    await handleCreatePost(data);
+    await handleCreatePost(data); 
+  // if (loading) {
+  //   return (
+  //     // <div>
+  //     //   <h1>Lading.....</h1>
+  //     // </div>
+  //   );
+  // }
     navigate("/");
   }
 

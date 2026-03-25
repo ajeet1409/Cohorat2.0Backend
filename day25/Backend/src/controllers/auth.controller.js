@@ -2,6 +2,9 @@ import jwt from "jsonwebtoken";
 import userModel from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
+import blacklistToken from "../models/blacklist.model.js";
+import redis from "../config/cache.js";
+
 const register = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -26,9 +29,9 @@ const register = async (req, res) => {
   });
   await newUser.save();
   const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: "10m",
   });
-  res.cookie(token, token, {
+  res.cookie("token", token, {
     httpOnly: true, // js can not access cookie // is someone XSS
     secure: true, // req sent over  https
     sameSite: "strict", // csrf protection
@@ -41,14 +44,18 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { username, email, password } = req.body;
-  const user = await userModel.findOne({
-    $or: [
-      { username }, // condition 1
-      {
-        email,
-      }, // condition2
-    ],
-  });
+  const user = await userModel
+    .findOne({
+      $or: [
+        { username }, // condition 1
+        {
+          email,
+        }, // condition2
+      ],
+    })
+    .select("+password");
+
+  // * why write invalid credentials when user not found because for security reason
 
   if (!user) {
     return res.status(401).json({
@@ -61,10 +68,10 @@ const login = async (req, res) => {
     return res.status(401).json({ message: "Invalid credetials" });
 
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: "10m",
   });
 
-  res.cookie(token, token, {
+  res.cookie("token", token, {
     httpONly: true,
     secure: true,
     sameSite: "strict",
@@ -75,4 +82,46 @@ const login = async (req, res) => {
     .json({ success: true, message: "user login successfully", user });
 };
 
-export default { register, login };
+const getMe = async (req, res) => {
+  console.log(req.user);
+
+  const user = await userModel.findById(req.user.userId).select("-password");
+  console.log(user);
+
+  if (!user) return res.status(401).json({ message: "invalid credentials" });
+
+  return res
+    .status(200)
+    .json({ message: "get-me data successfully", success: true, user });
+};
+
+const logoutUser = async (req, res) => {
+  const token = req.cookies.token;
+
+  res.clearCookie("token");
+
+  // decode token  to get expire time
+  const decoded = jwt.verify(token,process.env.JWT_SECRET);
+  console.log(decoded);
+
+  // await blacklistToken.create({
+  //   token,
+  //   expiresAt: new Date(decoded.exp * 1000), // convert to ms
+  // });
+  const expireTime = decoded.exp;
+  console.log(expireTime)
+  const currentTime = Math.floor(Date.now() / 1000); // Converts current time into seconds
+  console.log(currentTime)
+  const ttl = expireTime - currentTime;
+  console.log(ttl)
+
+  if (ttl > 0) {
+    await redis.set(`blacklist:${token}`, "true", "EX", ttl);
+  }
+
+  return res.status(201).json({
+    message: "logout successfully",
+  });
+};
+
+export default { register, login, getMe, logoutUser };
