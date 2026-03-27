@@ -29,7 +29,7 @@ const register = async (req, res) => {
   });
   await newUser.save();
   const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-    expiresIn: "10m",
+    expiresIn: "1h",
   });
   res.cookie("token", token, {
     httpOnly: true, // js can not access cookie // is someone XSS
@@ -68,7 +68,7 @@ const login = async (req, res) => {
     return res.status(401).json({ message: "Invalid credetials" });
 
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "10m",
+    expiresIn: "1h",
   });
 
   res.cookie("token", token, {

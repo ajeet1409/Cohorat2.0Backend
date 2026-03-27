@@ -18,6 +18,7 @@ main {
     
     //* margin use nahi kiys isliye display flex     kiya hai for gap
     @include flex-column(1rem);
+    background-color: red;
 
     min-width: 350px;
   }

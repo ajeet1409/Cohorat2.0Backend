@@ -1,0 +1,52 @@
+@mixin flex-column($gap: 0rem) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+.register-page {
+  // background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: 100vh;
+}
+
+.form-container {
+  //   background-color: rgb(89, 255, 0);
+
+  min-width: 350px;
+  aspect-ratio: 1/1;
+  @include flex-column(1rem);
+
+  justify-content: center;
+  //   align-items: center;
+}
+
+form {
+  @include flex-column(1rem);
+
+  //   background-color: red;
+
+  .form-group {
+    @include flex-column(0.5rem);
+  }
+
+  input {
+    // display: block;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+  }
+}
+
+p{
+    a{
+        text-decoration: none;
+        color: rgb(238, 81, 23);
+    }
+}
