@@ -34,11 +34,17 @@ export const useAuth = () => {
   };
 
   async function handleGetMe() {
-    setLoading(true);
-    const data = await getMe();
-    setUser(data.user);
-    console.log(data.user)
-    setLoading(false);
+    try {
+      setLoading(true);
+      const data = await getMe();
+      setUser(data.user);
+      console.log(data.user);
+    } catch (error) {
+      console.log("token is invalid and expires", error);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function handleLogout() {
