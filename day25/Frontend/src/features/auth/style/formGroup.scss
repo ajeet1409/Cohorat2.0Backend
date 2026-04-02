@@ -1,0 +1,118 @@
+@use '../../shared/style/variables.scss' as v;
+
+.form-group {
+  @include v.flex-column(var(--spacing-xs));
+  position: relative;
+  margin-bottom: var(--spacing-lg);
+  transition: all var(--transition-normal);
+
+  &__label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__required {
+    color: var(--error-color);
+    font-size: 1.1rem;
+  }
+
+  &__input {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--secondary-dark);
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all var(--transition-normal);
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
+
+    &:hover {
+      border-color: var(--secondary-light);
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    &:focus {
+      border-color: var(--primary-color);
+      background-color: rgba(238, 81, 23, 0.05);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(238, 81, 23, 0.1);
+    }
+
+    &:disabled {
+      background-color: var(--background-tertiary);
+      color: var(--text-disabled);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &__error {
+    font-size: 0.85rem;
+    color: var(--error-color);
+    margin-top: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    &::before {
+      content: '⚠';
+      font-size: 0.9rem;
+    }
+  }
+
+  &--error {
+    .form-group__input {
+      border-color: var(--error-color);
+      background-color: rgba(229, 57, 53, 0.05);
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.1);
+      }
+    }
+
+    .form-group__label {
+      color: var(--text-primary);
+    }
+  }
+
+  &--focused {
+    .form-group__label {
+      color: var(--primary-color);
+    }
+  }
+}
+
+/* Validation States */
+.form-group.success {
+  .form-group__input {
+    border-color: var(--success-color);
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+  }
+
+  &::after {
+    content: '✓';
+    position: absolute;
+    right: 1rem;
+    top: 2.5rem;
+    color: var(--success-color);
+    font-size: 1.2rem;
+  }
+}
+
+.form-group.loading {
+  .form-group__input {
+    border-color: var(--info-color);
+  }
+}

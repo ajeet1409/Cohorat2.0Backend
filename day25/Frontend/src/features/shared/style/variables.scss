@@ -1,0 +1,94 @@
+/* Design System Variables */
+
+:root {
+  /* Colors */
+  --primary-color: rgb(238, 81, 23);
+  --primary-hover: #e85a1a;
+  --primary-light: rgba(238, 81, 23, 0.1);
+  --primary-dark: #c4571a;
+
+  --secondary-color: #666;
+  --secondary-light: #888;
+  --secondary-dark: #444;
+
+  --success-color: #4caf50;
+  --error-color: #e53935;
+  --warning-color: #ff9800;
+  --info-color: #2196f3;
+
+  --background-primary: #1a1a1a;
+  --background-secondary: #2a2a2a;
+  --background-tertiary: #333;
+  
+  --text-primary: #f5f5f5;
+  --text-secondary: #ccc;
+  --text-tertiary: #aaa;
+  --text-muted: #999;
+  --text-disabled: #666;
+
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border Radius */
+  --border-radius-sm: 0.5rem;
+  --border-radius: 1rem;
+  --border-radius-lg: 1.5rem;
+  --border-radius-full: 9999px;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family-mono: 'SFMono-Regular', 'Consolas', 'Liberation Mono',
+    'Menlo', monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-focus: 0 0 0 3px rgba(238, 81, 23, 0.2);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+
+  /* Z-index Scale */
+  --z-dropdown: 100;
+  --z-modal-backdrop: 200;
+  --z-modal: 300;
+  --z-notification: 400;
+}
+
+/* Mixins */
+@mixin flex-column($gap: var(--spacing-md)) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin smooth-transition($properties: all) {
+  transition: $properties var(--transition-normal);
+}
+
+@mixin focus-ring($color: var(--primary-color)) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+  box-shadow: var(--shadow-focus);
+}

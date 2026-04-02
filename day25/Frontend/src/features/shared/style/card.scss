@@ -1,0 +1,40 @@
+@use '../style/variables.scss' as v;
+
+.card {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-tertiary);
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    border-color: rgba(238, 81, 23, 0.3);
+  }
+
+  /* Padding Variants */
+  &--sm {
+    padding: var(--spacing-md);
+  }
+
+  &--md {
+    padding: var(--spacing-lg);
+  }
+
+  &--lg {
+    padding: var(--spacing-xl);
+  }
+
+  &--xl {
+    padding: var(--spacing-2xl);
+  }
+
+  /* Elevated Card */
+  &--elevated {
+    box-shadow: var(--shadow-md);
+    border-color: rgba(238, 81, 23, 0.2);
+
+    &:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(238, 81, 23, 0.4);
+    }
+  }
+}

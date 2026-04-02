@@ -2,11 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 
 import {init,detect} from '../utils/utils.js'
 
-export default function FaceEmotion() {
+export default function FaceExpression({onClick=()=>{}}) {
   const videoRef = useRef(null);
   const faceLandmarkerRef = useRef(null);
 
   const [emotion, setEmotion] = useState("Detecting...");
+
+  
+
+
+  const handleClick=()=>{
+    const expression = detect({faceLandmarkerRef,videoRef,setEmotion})
+    onClick(expression)
+    // console.log(expression)
+  }
 
   
 
@@ -19,7 +28,7 @@ export default function FaceEmotion() {
       <h2>Emotion: {emotion}</h2>
       <video ref={videoRef} autoPlay playsInline/>
      <div>
-       <button onClick={()=>{detect({faceLandmarkerRef,videoRef,setEmotion})}}>Detect Expression</button>
+       <button onClick={handleClick}>Detect Expression</button>
      </div>
     </div>
   );
