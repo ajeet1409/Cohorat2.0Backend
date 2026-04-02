@@ -7,7 +7,7 @@ const Logout = () => {
   const navigate = useNavigate();
   const { handleLogout ,loading} = useAuth();
 
-  if(loading) return <h1>loading............</h1>
+  // if(loading) return <h1>loading............</h1>
   
     const logout = async () => {
       console.log('hello')

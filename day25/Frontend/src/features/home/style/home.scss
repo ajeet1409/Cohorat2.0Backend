@@ -7,6 +7,67 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: fixed;
+    inset: auto;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(12px);
+  }
+
+  &::before {
+    width: 30rem;
+    height: 30rem;
+    left: -10rem;
+    top: -8rem;
+    background: radial-gradient(circle, rgba(41, 199, 111, 0.38), transparent 68%);
+  }
+
+  &::after {
+    width: 26rem;
+    height: 26rem;
+    right: -8rem;
+    bottom: -6rem;
+    background: radial-gradient(circle, rgba(18, 130, 73, 0.28), transparent 68%);
+  }
+}
+
+.home > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home__hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  border-radius: calc(var(--border-radius-lg) + 0.25rem);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(135deg, rgba(15, 41, 26, 0.92), rgba(8, 20, 13, 0.84)),
+    linear-gradient(135deg, rgba(41, 199, 111, 0.22), rgba(41, 199, 111, 0.03));
+  box-shadow: var(--shadow-lg);
+
+  h1 {
+    margin-top: var(--spacing-xs);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    max-width: 12ch;
+  }
+}
+
+.home__hero-copy {
+  max-width: 52ch;
+  margin-top: var(--spacing-md);
+  color: var(--text-secondary);
+  font-size: 1rem;
 }
 
 .home__top-grid {
@@ -17,15 +78,12 @@
 }
 
 .home__panel {
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.02)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(145deg, rgba(12, 25, 17, 0.85), rgba(8, 15, 11, 0.72));
+  border: 1px solid rgba(41, 199, 111, 0.14);
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
+  backdrop-filter: blur(18px);
 }
 
 .home__panel--left {
@@ -75,10 +133,11 @@
 
 .home__scanner-card,
 .home__songs-card {
-  background: rgba(0, 0, 0, 0.2);
+  background:
+    linear-gradient(180deg, rgba(9, 20, 13, 0.94), rgba(7, 14, 10, 0.9));
   border-radius: var(--border-radius);
   padding: var(--spacing-xl);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(41, 199, 111, 0.12);
 }
 
 .home__songs-card {
@@ -105,7 +164,7 @@
 }
 
 .home__status-chip {
-  background: var(--primary-light);
+  background: linear-gradient(135deg, rgba(41, 199, 111, 0.22), rgba(41, 199, 111, 0.1));
   color: var(--primary-color);
   padding: 0.3rem 0.8rem;
   border-radius: var(--border-radius-full);
@@ -119,7 +178,8 @@
   video {
     width: 100%;
     border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(41, 199, 111, 0.16);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
   }
 
   button {
@@ -159,8 +219,8 @@
   font-size: 0.95rem;
   padding: var(--spacing-lg);
   border-radius: var(--border-radius);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px dashed rgba(255, 255, 255, 0.08);
+  background: rgba(41, 199, 111, 0.06);
+  border: 1px dashed rgba(41, 199, 111, 0.18);
 }
 
 .home__song-list-item {
@@ -181,14 +241,14 @@
   appearance: none;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(41, 199, 111, 0.35);
     transform: translateY(-2px);
   }
 
   &.is-active {
     border-color: var(--primary-color);
-    background: rgba(238, 81, 23, 0.12);
-    box-shadow: 0 10px 30px rgba(238, 81, 23, 0.25);
+    background: linear-gradient(135deg, rgba(41, 199, 111, 0.18), rgba(41, 199, 111, 0.07));
+    box-shadow: 0 10px 30px rgba(41, 199, 111, 0.2);
   }
 }
 
@@ -240,12 +300,17 @@
 .home__player-inline {
   margin-top: var(--spacing-lg);
   padding-top: var(--spacing-md);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(41, 199, 111, 0.14);
 }
 
 @media (max-width: 1024px) {
   .home {
     padding: var(--spacing-xl);
+  }
+
+  .home__hero {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .home__top-grid {

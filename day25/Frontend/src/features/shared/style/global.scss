@@ -10,8 +10,11 @@ html,
 body,
 #root {
   width: 100% ;
-  background-color: #333;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top, rgba(41, 199, 111, 0.16), transparent 36%),
+    linear-gradient(180deg, #08130d 0%, #0b1e14 40%, #06100b 100%);
   color: whitesmoke;
-  font-family: sans-serif;
+  font-family: var(--font-family);
   
 }

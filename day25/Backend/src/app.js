@@ -5,6 +5,10 @@ dotenv.config();
 import express from "express";
 import cookieParser from "cookie-parser";
 import morgan from 'morgan'
+import path from 'path'
+
+const __dirname = path.resolve()
+console.log(__dirname)
 
 // *import Routes
 import authRoutes from "./routes/auth.route.js";
@@ -18,6 +22,8 @@ app.use(cors({
     credentials:true
 }))
 
+app.use(express.static('./public'))
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'))
@@ -25,4 +31,9 @@ app.use(morgan('dev'))
 ///require routes
 app.use("/api/auth", authRoutes);
 app.use("/api/songs",songRouters)
+
+// wild card
+app.use('*name',(req,res)=>{
+    res.sendFile(path.join(__dirname,'.','/public/index.html'))
+})
 

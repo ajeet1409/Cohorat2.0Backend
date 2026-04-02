@@ -2,10 +2,10 @@
 
 :root {
   /* Colors */
-  --primary-color: rgb(238, 81, 23);
-  --primary-hover: #e85a1a;
-  --primary-light: rgba(238, 81, 23, 0.1);
-  --primary-dark: #c4571a;
+  --primary-color: #29c76f;
+  --primary-hover: #21b45f;
+  --primary-light: rgba(41, 199, 111, 0.14);
+  --primary-dark: #15944a;
 
   --secondary-color: #666;
   --secondary-light: #888;
@@ -50,7 +50,7 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
-  --shadow-focus: 0 0 0 3px rgba(238, 81, 23, 0.2);
+  --shadow-focus: 0 0 0 3px rgba(41, 199, 111, 0.22);
 
   /* Transitions */
   --transition-fast: 0.15s ease-in-out;

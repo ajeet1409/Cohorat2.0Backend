@@ -40,7 +40,17 @@ const Home = () => {
 
   return (
     <main className="home">
-      {/* <Logout /> */}
+      <header className="home__hero">
+        <div>
+          <p className="home__eyebrow">Mood sync</p>
+          <h1>Green energy for your music flow</h1>
+          <p className="home__hero-copy">
+            Scan your expression, match a track, and stay inside a fresh neon-green atmosphere.
+          </p>
+        </div>
+        <Logout />
+      </header>
+
       <section className="home__top-grid">
         <section className="home__panel home__panel--left">
           <div className="home__scanner-card">

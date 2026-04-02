@@ -1,5 +1,5 @@
 import { AuthContext } from "../auth.context";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 import { register, login, getMe, logout } from "../services/auth.api.";
 
@@ -33,20 +33,6 @@ export const useAuth = () => {
     }
   };
 
-  async function handleGetMe() {
-    try {
-      setLoading(true);
-      const data = await getMe();
-      setUser(data.user);
-      console.log(data.user);
-    } catch (error) {
-      console.log("token is invalid and expires", error);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   async function handleLogout() {
     try {
       setLoading(true);
@@ -59,17 +45,12 @@ export const useAuth = () => {
     }
   }
 
-  useEffect(() => {
-    handleGetMe();
-  }, []);
-
   // ek object return karna hota hai
   return {
     user,
     loading,
     handleRegister,
     handleLogin,
-    handleGetMe,
     handleLogout,
   };
 };
