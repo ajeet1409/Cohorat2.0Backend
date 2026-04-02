@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 import "../style/login.scss";
 import FormGroup from "../components/FormGroup";
@@ -36,7 +37,8 @@ const Login = () => {
     // **handlelogin call api
      await  handleLogin(userData);
 
-    alert("user login successfully");
+    // alert("user login successfully");
+    toast.success("user login successfully")
     navigate("/");
   };
 

@@ -8,7 +8,7 @@ const Toast = ({ message, type = "info", duration = 3000, onClose }) => {
     if (duration > 0) {
       const timer = setTimeout(() => {
         setIsExiting(true);
-        setTimeout(onClose, 300);
+        setTimeout(onClose, 3000);
       }, duration);
 
       return () => clearTimeout(timer);
@@ -17,7 +17,7 @@ const Toast = ({ message, type = "info", duration = 3000, onClose }) => {
 
   const handleClose = () => {
     setIsExiting(true);
-    setTimeout(onClose, 300);
+    setTimeout(onClose, 3000);
   };
 
   const typeIcons = {

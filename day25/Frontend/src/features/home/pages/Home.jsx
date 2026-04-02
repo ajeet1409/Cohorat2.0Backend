@@ -3,6 +3,7 @@ import FaceExpression from "../../expression/pages/FaceExpression";
 import Player from "../components/Player";
 import { useSong } from "../hook/useSong.js";
 import "../style/home.scss";
+import Logout from "../../auth/components/Logout.jsx";
 
 const SUPPORTED_MOODS = ["happy", "sad", "surprised"];
 
@@ -39,6 +40,7 @@ const Home = () => {
 
   return (
     <main className="home">
+      {/* <Logout /> */}
       <section className="home__top-grid">
         <section className="home__panel home__panel--left">
           <div className="home__scanner-card">
@@ -129,12 +131,12 @@ const Home = () => {
                 </ul>
               )}
             </div>
+
+            <div className="home__player-inline">
+              <Player song={song} loading={loading} autoPlayOnSongChange />
+            </div>
           </div>
         </section>
-      </section>
-
-      <section className="home__bottom-player">
-        <Player song={song} loading={loading} autoPlayOnSongChange />
       </section>
     </main>
   );

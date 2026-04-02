@@ -4,13 +4,16 @@
   width: 100%;
   min-height: 100vh;
   padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
 }
 
-.home__grid {
+.home__top-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: var(--spacing-2xl);
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .home__panel {
@@ -34,7 +37,7 @@
 .home__panel--right {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-lg);
 }
 
 .home__user-card {
@@ -76,6 +79,13 @@
   border-radius: var(--border-radius);
   padding: var(--spacing-xl);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.home__songs-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
 }
 
 .home__scanner-header,
@@ -128,6 +138,10 @@
 
 .home__song-list-wrapper {
   margin-top: var(--spacing-lg);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: var(--spacing-xs);
 }
 
 .home__song-list {
@@ -223,12 +237,18 @@
   color: var(--primary-color);
 }
 
+.home__player-inline {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 @media (max-width: 1024px) {
   .home {
     padding: var(--spacing-xl);
   }
 
-  .home__grid {
+  .home__top-grid {
     grid-template-columns: 1fr;
   }
 }

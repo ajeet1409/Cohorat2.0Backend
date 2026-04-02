@@ -97,11 +97,14 @@ const getMe = async (req, res) => {
 
 const logoutUser = async (req, res) => {
   const token = req.cookies.token;
+  if(!token){
+    res.status(401).json({message:"logout successfully"})
+  }
 
   res.clearCookie("token");
 
   // decode token  to get expire time
-  const decoded = jwt.verify(token,process.env.JWT_SECRET);
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
   console.log(decoded);
 
   // await blacklistToken.create({
@@ -109,11 +112,11 @@ const logoutUser = async (req, res) => {
   //   expiresAt: new Date(decoded.exp * 1000), // convert to ms
   // });
   const expireTime = decoded.exp;
-  console.log(expireTime)
+  console.log(expireTime);
   const currentTime = Math.floor(Date.now() / 1000); // Converts current time into seconds
-  console.log(currentTime)
+  console.log(currentTime);
   const ttl = expireTime - currentTime;
-  console.log(ttl)
+  console.log(ttl);
 
   if (ttl > 0) {
     await redis.set(`blacklist:${token}`, "true", "EX", ttl);

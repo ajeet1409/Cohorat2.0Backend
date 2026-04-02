@@ -56,9 +56,9 @@ export const detect = ({ faceLandmarkerRef, videoRef, setEmotion }) => {
     const jaw = getScore("jawOpen");
 
     // Emotion Logic
-    alert("clcik");
+    // alert("clcik");
 
-    let currentExpression = "Neutral";
+    let currentExpression ='Neutral'
     if (smile > 0.6) {
       currentExpression = "happy ";
 
@@ -66,7 +66,7 @@ export const detect = ({ faceLandmarkerRef, videoRef, setEmotion }) => {
     } else if (brow > 0.4 && jaw > 0.4) {
       currentExpression = "surprised";
       setEmotion(" surprised");
-    } else if (frownLeft > 0.0001 && frownRight > 0.0001) {
+    } else if (frownLeft > 0.00 && frownRight > 0.0001) {
       currentExpression = "sad";
       setEmotion(" sad");
     } else {

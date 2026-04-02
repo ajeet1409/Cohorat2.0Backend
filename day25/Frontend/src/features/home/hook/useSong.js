@@ -19,6 +19,7 @@ export const useSong = () => {
         : [];
 
       setSongs(list);
+      // Pick the first detected-mood song so player can autoplay it.
       setSong(list[0] ? { ...list[0] } : null);
     } catch (error) {
       console.log(error);
